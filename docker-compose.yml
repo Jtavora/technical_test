@@ -30,6 +30,16 @@ services:
     # Se quiser hot reload em dev, descomente:
     # volumes:
     #   - ./system:/app
+  
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api
 
 volumes:
   postgres_data:
