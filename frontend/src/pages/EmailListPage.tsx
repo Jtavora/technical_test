@@ -26,6 +26,8 @@ import {
   Button,
   TextField,
   IconButton,
+  Snackbar,
+  Alert,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import type { Email, EmailCategory } from "../api/emails";
@@ -39,11 +41,17 @@ export function EmailListPage() {
 
   const [selectedEmail, setSelectedEmail] = useState<Email | null>(null);
   const [detailDraft, setDetailDraft] = useState("");
-  const [detailCategory, setDetailCategory] = useState<EmailCategory | "INCONCLUSIVO">(
-    "INCONCLUSIVO",
-  );
+  const [detailCategory, setDetailCategory] = useState<
+    EmailCategory | "INCONCLUSIVO"
+  >("INCONCLUSIVO");
   const [detailRequiresReview, setDetailRequiresReview] = useState(false);
   const [saving, setSaving] = useState(false);
+
+  // Snackbar de feedback
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+  const [snackbarSeverity, setSnackbarSeverity] =
+    useState<"success" | "error">("success");
 
   async function fetchData() {
     try {
@@ -127,6 +135,15 @@ export function EmailListPage() {
         prev.map((e) => (e.id === updated.id ? updated : e)),
       );
       setSelectedEmail(updated);
+
+      setSnackbarMessage("Alterações salvas com sucesso.");
+      setSnackbarSeverity("success");
+      setSnackbarOpen(true);
+    } catch (error) {
+      console.error(error);
+      setSnackbarMessage("Erro ao salvar alterações. Tente novamente.");
+      setSnackbarSeverity("error");
+      setSnackbarOpen(true);
     } finally {
       setSaving(false);
     }
@@ -345,6 +362,22 @@ export function EmailListPage() {
           </Button>
         </DialogActions>
       </Dialog>
+
+      {/* Snackbar de feedback */}
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={3000}
+        onClose={() => setSnackbarOpen(false)}
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+      >
+        <Alert
+          onClose={() => setSnackbarOpen(false)}
+          severity={snackbarSeverity}
+          sx={{ width: "100%" }}
+        >
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
     </>
   );
 }

@@ -26,6 +26,8 @@ class EmailClassificationService:
             confidence=0.0,
             draft_reply="",
             requires_human_review=True,
+            created_at=None,
+            updated_at=None,
         )
 
         # chama a LLM

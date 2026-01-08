@@ -27,6 +27,8 @@ def _to_response(email) -> EmailResponse:
         confidence=email.confidence,
         draft_reply=email.draft_reply,
         requires_human_review=email.requires_human_review,
+        created_at=email.created_at,
+        updated_at=email.updated_at,
     )
 
 

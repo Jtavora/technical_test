@@ -1,6 +1,7 @@
 from typing import Optional
 
 from pydantic import BaseModel, EmailStr
+from datetime import datetime
 
 from system.app.domain.entities.classification import EmailCategory
 
@@ -27,3 +28,5 @@ class EmailResponse(BaseModel):
     confidence: float
     draft_reply: str
     requires_human_review: bool
+    created_at: Optional[datetime]
+    updated_at: Optional[datetime]

@@ -14,3 +14,5 @@ class Email:
     confidence: float
     draft_reply: str
     requires_human_review: bool
+    created_at: Optional[str] = None
+    updated_at: Optional[str] = None

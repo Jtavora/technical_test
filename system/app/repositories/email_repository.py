@@ -71,4 +71,6 @@ class SqlAlchemyEmailRepository:
             confidence=model.confidence,
             draft_reply=model.draft_reply,
             requires_human_review=model.requires_human_review,
+            created_at=model.created_at,
+            updated_at=model.updated_at,
         )
