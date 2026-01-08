@@ -1,0 +1,37 @@
+@startuml
+title Arquitetura - Classificação de E-mails
+
+skinparam componentStyle rectangle
+skinparam shadowing false
+
+rectangle "Usuário\n(Time de Suporte)" as User
+
+node "Front-end Web\n(React/Vue/etc)\n<<MVP>>" as FE
+node "API Backend\n(FastAPI)\n<<MVP>>" as BE
+database "PostgreSQL\n<<MVP>>" as DB
+
+cloud "LLM Provider\n(OpenAI API)\n<<MVP>>" as LLM
+
+cloud "Provedor de E-mail\n(IMAP/SMTP/API)\n<<Futuro>>" as Mail
+cloud "Canal de Alertas\n(Telegram / Discord / WPP)\n<<Futuro>>" as Notif
+
+User -- FE : Usa via navegador
+FE --> BE : HTTP/JSON\n(classificação, revisão)
+BE --> DB : ORM / SQL\n(salvar e-mails,\nclassificação, rascunhos)
+BE --> LLM : HTTPS\n(prompt p/ classificação\n+ rascunho)
+
+' Futuro: ingestão automática de e-mails
+BE --> Mail : (Futuro)\nBuscar e-mails\nvia IMAP/SMTP/API
+
+' Futuro: alertas
+BE --> Notif : (Futuro)\nEnviar alertas\ncasos urgentes
+
+note bottom of BE
+  Responsabilidades principais:
+  - Expor API REST
+  - Orquestrar chamadas ao LLM
+  - Aplicar lógica de negócio
+  - Persistir dados no Postgres
+end note
+
+@enduml

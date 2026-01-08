@@ -1,0 +1,23 @@
+@startuml
+title Fluxo - Classificação e Revisão de E-mail
+
+actor "Agente de Suporte" as Agent
+participant "Front-end Web" as FE
+participant "API FastAPI" as BE
+database "PostgreSQL" as DB
+participant "LLM API\n(OpenAI)" as LLM
+
+Agent -> FE : Seleciona/cola e-mail\n(assunto + corpo)
+FE -> BE : POST /classify-email\n(email_payload)
+BE -> LLM : Requisição de classificação\n+ geração de rascunho
+LLM --> BE : classificação, confiança,\nrascunho, justificativa
+
+BE -> DB : INSERT email\n+ resultado da IA
+BE --> FE : JSON com\nclassificação + rascunho
+
+FE --> Agent : Exibe categoria sugerida\n+ rascunho editável
+Agent -> FE : Edita rascunho e aprova
+FE -> BE : PATCH /emails/{id}\n(status=APPROVED,\nrascunho_final)
+BE -> DB : UPDATE email\ncom status e rascunho final
+
+@enduml

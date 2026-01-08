@@ -1,0 +1,27 @@
+@startuml
+title Lógica de Classificação (Sem ambiguidade)
+
+start
+
+:Receber e-mail (assunto, corpo, metadados);
+
+:Construir prompt com instruções,\ncategorias e formato da resposta;
+
+:Chamar LLM e receber resposta;
+
+if (Estrutura esperada?) then (sim)
+    :Extrair classificação,\nconfiança e rascunho;
+else (não)
+    :Definir classificação = INCONCLUSIVO;
+    :Definir confiança = 0;
+    :Definir requires_human_review = true;
+endif
+
+if (confiança < LIMIAR) then (sim)
+    :requires_human_review = true;
+endif
+
+:Persistir no Postgres:\n- email\n- classificação\n- confiança\n- rascunho\n- requires_human_review;
+
+stop
+@enduml
