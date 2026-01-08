@@ -2,12 +2,13 @@
 from system.app.domain.entities.email_entity import Email
 from system.app.domain.entities.classification import EmailCategory
 from system.app.infrastructure.llm.openai_client import DummyLLMClient
+from system.app.infrastructure.llm.llm_client import OpenAILLMClient
 from system.app.schemas.email_schemas import EmailCreateRequest
 
 
 class EmailClassificationService:
-    def __init__(self, llm_client: DummyLLMClient | None = None):
-        self._llm_client = llm_client or DummyLLMClient()
+    def __init__(self, llm_client: OpenAILLMClient | None = None):
+        self._llm_client = llm_client or OpenAILLMClient()
 
     async def classify_from_request(self, payload: EmailCreateRequest) -> Email:
         email = Email(
