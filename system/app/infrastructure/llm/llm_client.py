@@ -1,4 +1,3 @@
-# system/app/infrastructure/llm/openai_client.py
 import asyncio
 import json
 
@@ -14,7 +13,7 @@ from system.app.domain.entities.classification import (
 client = OpenAI(api_key=settings.OPENAI_API_KEY)
 
 
-class OpenAILLMClient:
+class LLMClient:
     """
     Cliente de LLM usando OpenAI para classificar e gerar rascunho.
     """

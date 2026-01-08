@@ -7,6 +7,7 @@ from pydantic_settings import BaseSettings
 class Settings(BaseSettings):
     ENV: str = Field(default="local")
     APP_NAME: str = Field(default="Email Classification API")
+    APP_VERSION: str = Field(default="1.0.0")
 
     DATABASE_URL: str = Field(
         default="sqlite+aiosqlite:///./emails.db",

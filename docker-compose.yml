@@ -1,0 +1,35 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:16
+    container_name: email_pg
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: email_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  api:
+    build:
+      context: ./system
+      dockerfile: Dockerfile
+    container_name: email_api
+    restart: unless-stopped
+    env_file:
+      - ./system/app/.env
+    depends_on:
+      - db
+    ports:
+      - "8000:8000"
+    working_dir: /app
+    # Se quiser hot reload em dev, descomente:
+    # volumes:
+    #   - ./system:/app
+
+volumes:
+  postgres_data:
