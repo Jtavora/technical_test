@@ -5,7 +5,7 @@ Permite classificar, revisar, editar e listar e-mails com interface moderna e AP
 
 ---
 
-## 🎯 1. Escopo do Protótipo (2 semanas)
+## 🎯 1. Escopo do Protótipo
 
 ### ✅ O que está dentro do escopo
 
