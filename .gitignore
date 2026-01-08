@@ -1,0 +1,77 @@
+###############################################
+# PYTHON
+###############################################
+__pycache__/
+**/__pycache__/
+
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+###############################################
+# FASTAPI / BACKEND (system/app/)
+###############################################
+
+# Local environment variables
+system/app/.env
+system/app/.env.*
+
+# Migrations cache
+system/app/migrations/versions/*.pyc
+
+# Logs
+system/app/*.log
+system/app/logs/
+
+###############################################
+# ALEMBIC
+###############################################
+alembic.ini
+migrations/versions/*.pyc
+
+###############################################
+# DATABASE
+###############################################
+*.db
+*.sqlite3
+*.sqlite
+
+###############################################
+# DOCKER
+###############################################
+docker-data/
+volumes/
+docker-compose.override.yml
+
+###############################################
+# OS / EDITORS
+###############################################
+
+# VSCode
+.vscode/
+
+# JetBrains (PyCharm)
+.idea/
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# macOS
+.DS_Store
+.AppleDouble
+
+###############################################
+# NODE / FRONTEND (caso use)
+###############################################
+node_modules/
+dist/
+build/
+*.tsbuildinfo
