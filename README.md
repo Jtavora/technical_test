@@ -146,9 +146,9 @@ Arquivos-fonte:
 - `PlantUML/sequence.puml` – Fluxo de classificação (sequência)  
 - `PlantUML/activity.puml` – Fluxo de atividade da solução  
 
-![Arquitetura](PlantUML/componentdiagram.png)
-![Sequência](PlantUML/sequencediagram.png)
-![Atividade](PlantUML/activitydiagram.png)
+![Arquitetura](PlantUML/out/comp.png)
+![Sequência](PlantUML/out/sequence.png)
+![Atividade](PlantUML/out/activity.png)
 
 ---
 
